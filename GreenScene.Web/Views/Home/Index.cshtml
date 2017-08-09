@@ -1,0 +1,28 @@
+﻿@{
+   ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+   <div ng-view>
+      <p>Loading...</p>
+      <noscript>
+         <p>Please enable JavaScript</p>
+      </noscript>
+   </div><!--/ng-view-->
+</div><!--/.container-->
+<script type="text/ng-template" id="homeTemplate.html">
+   <div class="row">
+      <div class="col-sm-6 col-md-4" ng-repeat="scene in scenes">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <a href="#/scene/{{scene.id}}" ng-bind="scene.title"></a>
+            </div>
+            <div class="panel-body">
+               <div class="scene-preview">
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </div>
+</script>
