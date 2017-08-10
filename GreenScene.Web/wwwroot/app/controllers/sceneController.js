@@ -1,19 +1,11 @@
 (function(){
     angular.module('app')
-        .controller('sceneController', ['$scope', '$routeParams', 'sceneDataService', sceneController]);
+        .controller('sceneController', ['$scope', '$rootScope', 'scene', sceneController]);
 
-    function sceneController($scope, $routeParams, sceneDataService){
+    function sceneController($scope, $rootScope, scene){
         var vm = $scope;
-        var sceneId = $routeParams.id;
-        
-        sceneDataService.getSceneByID(sceneId)
-        .then(function(scene){
-            vm.scene = scene;
-        })
-        .catch(function(error){
-            console.log(error);
-        });
+        vm.scene = scene;
 
-        console.log('ran scene controller');
+        $rootScope.setTitle(scene.title);
     }
 })()

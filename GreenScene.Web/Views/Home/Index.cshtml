@@ -15,7 +15,7 @@
       <div class="col-sm-6 col-md-4" ng-repeat="scene in scenes">
          <div class="panel panel-default">
             <div class="panel-heading">
-               <a href="#/scene/{{scene.id}}" ng-bind="scene.title"></a>
+               <a href="#!/scene/{{scene.key}}" ng-bind="scene.title"></a>
             </div>
             <div class="panel-body">
                <div class="scene-preview">
@@ -26,3 +26,33 @@
       </div>
    </div>
 </script>
+
+@section Scripts {
+<environment names="Development">
+   <script src="~/lib/angular/angular.js"></script>
+   <script src="~/lib/angular-route/angular-route.js"></script>
+   <script src="~/lib/angular-animate/angular-animate.js"></script>
+   @*<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize-min.js"></script>*@
+   <script src="~/lib/angular-bootstrap/ui-bootstrap.js"></script>
+   <script src="~/app/app.js" asp-append-version="true"></script>
+   <script src="~/app/controllers/homeController.js" asp-append-version="true"></script>
+   <script src="~/app/controllers/sceneController.js" asp-append-version="true"></script>
+   <script src="~/app/controllers/fileSelectController.js" asp-append-version="true"></script>
+   <script src="~/app/services/sceneDataService.js" asp-append-version="true"></script>
+</environment>
+<environment names="Staging,Production">
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"
+           asp-fallback-src="~/lib/angular/angular.min.js"
+           asp-fallback-test="window.angular"
+           crossorigin="anonymous">
+   </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"
+           asp-fallback-src="~/lib/angular-route/angular-route.min.js"
+           crossorigin="anonymous">
+   </script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate-min.js"></script>
+   @*<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize-min.js"></script>*@
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+   <script src="~/app/app-bundle.min.js"></script>
+</environment>
+}
