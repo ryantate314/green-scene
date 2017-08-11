@@ -64,6 +64,12 @@ namespace GreenScene.Web.Controllers
                .Replace("..", "")
                .Trim();
 
+         //Remove leading directory separator to force a relative path.
+         if (!String.IsNullOrEmpty(path) && path[0] == Path.DirectorySeparatorChar)
+         {
+            path = path.Substring(1);
+         }
+
          string regex = $"^(\\{Path.DirectorySeparatorChar}?)(([a-zA-Z0-9\\-_ \\.]+)(\\{Path.DirectorySeparatorChar}[a-zA-Z0-9\\-_ \\.]+)*\\{Path.DirectorySeparatorChar}?)?$";
          System.Diagnostics.Debug.WriteLine(path);
          System.Diagnostics.Debug.WriteLine(regex);
@@ -72,10 +78,6 @@ namespace GreenScene.Web.Controllers
          {
             throw new Exception("Invalid path.");
          }
-         //if (!String.IsNullOrEmpty(path) && path[0] != Path.DirectorySeparatorChar)
-         //{
-         //   path = Path.DirectorySeparatorChar + path;
-         //}
          return path;
       }
 
@@ -123,18 +125,13 @@ namespace GreenScene.Web.Controllers
          return filesAndDirectories;
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="partialPath">A relative path which has been sanitized to the current platform.</param>
+      /// <returns></returns>
       private string GenerateAbsolutePath(string partialPath)
       {
-         if (!String.IsNullOrEmpty(partialPath))
-         {
-            //If begins with directory separator, the Path.Combine function
-            //thinks it's an absolute path. Remove it to force relative.
-            if (partialPath[0] == Path.DirectorySeparatorChar)
-            {
-               partialPath = partialPath.Substring(1);
-            }
-         }
-
          //Assume config file has been configured with native directory separators
          string fullPath = Path.Combine(_rootDirectory, partialPath);
          return fullPath;
